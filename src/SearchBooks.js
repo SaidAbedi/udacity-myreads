@@ -14,11 +14,12 @@ class SearchBooks extends Component {
   componentDidMount() {
     console.log("mounted");
   }
-  componentDidUpdate() {
-    console.log("updated");
-    BookAPI.search(this.state.query).then(results => {
-      this.setState({ books: results });
-    });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.query.length !== prevState.query.length) {
+      BookAPI.search(this.state.query).then(results => {
+        this.setState({ books: results });
+      });
+    }
   }
   handleChange(e) {
     e.preventDefault();
@@ -38,13 +39,17 @@ class SearchBooks extends Component {
             onChange={e => this.handleChange(e)}
           />
         </form>
-        {this.state.books.length > 1 ? (
-          this.state.books.map(book => <BookPreview book={book} />)
-        ) : (
-          <div className="no-books-shown">
-            <h1>No Books Found</h1>
-          </div>
-        )}
+        <div className="preview-list">
+          {this.state.books.length > 1 ? (
+            this.state.books.map(book => (
+              <BookPreview book={book} key={book.id} />
+            ))
+          ) : (
+            <div className="no-books-shown">
+              <h1>No Books Found</h1>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

@@ -1,0 +1,15 @@
+.menu {
+  width: 250px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  background-color: #adadad;
+  padding: 15px 10px;
+
+  button {
+    font-size: 14pt;
+    width: 100%;
+    margin: 5px auto;
+    background-color: rgb(219, 180, 129);
+  }
+}
