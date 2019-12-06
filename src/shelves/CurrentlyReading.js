@@ -3,18 +3,19 @@ import BookPreview from "../BookPreview";
 
 const CurrentlyReading = props => {
   return (
-    <div className="shelf">
+    <div>
       <h1>Currently Reading Props</h1>
-
-      {props.books.length > 0 ? (
-        props.books.map(book => {
-          return <BookPreview book={book} key={book.id} />;
-        })
-      ) : (
-        <div>
-          <h2>No books on the Currently Reading Shelf</h2>
-        </div>
-      )}
+      <div className="shelf">
+        {props.books.length > 0 ? (
+          props.books.map(book => {
+            return <BookPreview book={book} key={book.id} />;
+          })
+        ) : (
+          <div>
+            <h2>No books on the Currently Reading Shelf</h2>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

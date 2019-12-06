@@ -6,8 +6,8 @@ import SearchBooks from "./SearchBooks";
 function App() {
   return (
     <div className="App">
-      <SearchBooks />
       <BookShelf />
+      <SearchBooks />
     </div>
   );
 }
