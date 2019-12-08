@@ -8,7 +8,13 @@ const CurrentlyReading = props => {
       <div className="shelf">
         {props.books.length > 0 ? (
           props.books.map(book => {
-            return <BookPreview book={book} key={book.id} />;
+            return (
+              <BookPreview
+                book={book}
+                key={book.id}
+                updateBookShelves={props.updateBookShelves}
+              />
+            );
           })
         ) : (
           <div>

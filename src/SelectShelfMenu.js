@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./selectShelf.scss";
-import { update } from "./BookAPI";
 
 class SelectShelfMenu extends Component {
   state = {
@@ -14,38 +13,32 @@ class SelectShelfMenu extends Component {
       bookId: id
     });
   };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    update(this.state.bookId, this.state.shelfSelection);
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState !== this.state) {
+      this.props.updateBookShelves();
+    }
   };
-  // componentDidUpdate() {
-  //   if (this.state.shelfSelection) {
-  //     update();
-  //   }
-  // }
 
   render() {
-    const id = this.props;
+    const { id, shelf } = this.props;
     return (
-      <div className="menu">
-        <form onSubmit={this.handleSubmit}>
-          <select className="menu" onChange={e => this.handleChange(e, id)}>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-          </select>
-          <button>CHANGE </button>
-        </form>
-        {/* <button onClick={() => console.log(update(id, "currentlyReading"))}>
-          Currently Reading
-        </button>
-        <button onClick={() => console.log(update(id, "wantToRead"))}>
-          {" "}
-          Want to Read{" "}
-        </button>
-        <button onClick={() => console.log(update(id, "read"))}> Read</button> */}
-      </div>
+      <form className="menu" onSubmit={this.handleSubmit}>
+        <select size="4" onChange={e => this.handleChange(e, id)}>
+          <option value="">--Please choose an shelf--</option>
+          <option
+            selected={shelf === "currentlyReading"}
+            value="currentlyReading"
+          >
+            Currently Reading
+          </option>
+          <option selected={shelf === "wantToRead"} value="wantToRead">
+            Want to Read
+          </option>
+          <option selected={shelf === "read"} value="read">
+            Read
+          </option>
+        </select>
+      </form>
     );
   }
 }

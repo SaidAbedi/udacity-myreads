@@ -14,17 +14,24 @@
     width: 100%;
     padding: 0px 10px;
     text-align: left;
-    background-color: rgb(41, 41, 41);
+    background-color: rgb(249, 249, 249);
 
     .book-title {
       color: rgb(218, 193, 0);
       padding-bottom: 5px;
       border-bottom: 0.5px solid #cdcdcd;
     }
+
+    .book-button-section {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px;
+    }
   }
   .add-icon {
     background: rgb(147, 147, 147);
     position: relative;
+
     width: 40px;
     border-radius: 50%;
     color: rgb(255, 237, 98);

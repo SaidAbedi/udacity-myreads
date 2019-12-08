@@ -13,6 +13,7 @@ class BookShelf extends Component {
     readyToShow: false
   };
   componentDidMount() {
+    console.log("updated bookshelf");
     getAll().then(results => {
       this.setState({
         books: results,
@@ -20,7 +21,16 @@ class BookShelf extends Component {
       });
     });
   }
+  updateBookShelves = () => {
+    getAll().then(results => {
+      this.setState({
+        books: results,
+        readyToShow: true
+      });
+    });
+  };
   componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps, prevState);
     if (this.state.books !== prevState.books) {
       const currentlyReadingBooks = this.state.books.filter(
         book => book.shelf === "currentlyReading"
@@ -45,7 +55,10 @@ class BookShelf extends Component {
         <div className="home-heading">
           <h1> My Reads </h1>
         </div>
-        <CurrentlyReading books={this.state.currentlyReadingBooks} />
+        <CurrentlyReading
+          books={this.state.currentlyReadingBooks}
+          updateBookShelves={this.updateBookShelves}
+        />
         <Read books={this.state.readBooks} />
         <WantToRead books={this.state.wantToReadBooks} />
       </div>
