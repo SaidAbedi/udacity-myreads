@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CurrentlyReading from "../shelves/CurrentlyReading";
 import Read from "../shelves/Read";
 import WantToRead from "../shelves/WantToRead";
-import { getAll } from "../BookAPI";
+import { getAll, update } from "../BookAPI";
 import "./bookShelf.scss";
 import { Link } from "react-router-dom";
 
@@ -25,13 +25,10 @@ class BookShelf extends Component {
       })
       .catch(() => this.setState({ showError: true }));
   }
-  updateBookShelves = () => {
-    getAll().then(({ currentlyReadingBooks, wantToReadBooks, readBooks }) => {
-      this.setState({
-        currentlyReadingBooks,
-        wantToReadBooks,
-        readBooks
-      });
+
+  updateBook = (book, shelf) => {
+    update(book, shelf).then(() => {
+      //this.setState()
     });
   };
 
