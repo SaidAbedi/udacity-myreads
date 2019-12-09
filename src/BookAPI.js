@@ -20,7 +20,19 @@ export const get = bookId =>
 export const getAll = () =>
   fetch(`${api}/books`, { headers })
     .then(res => res.json())
-    .then(data => data.books);
+    .then(({ books }) => {
+      const currentlyReadingBooks = books.filter(
+        book => book.shelf === "currentlyReading"
+      );
+      const wantToReadBooks = books.filter(book => book.shelf === "wantToRead");
+      const readBooks = books.filter(book => book.shelf === "read");
+
+      return {
+        currentlyReadingBooks,
+        wantToReadBooks,
+        readBooks
+      };
+    });
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {

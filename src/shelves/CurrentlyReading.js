@@ -1,5 +1,5 @@
 import React from "react";
-import BookPreview from "../BookPreview";
+import BookPreview from "../components/BookPreview";
 
 const CurrentlyReading = props => {
   return (

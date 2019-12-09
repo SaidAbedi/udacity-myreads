@@ -1,17 +1,18 @@
 import React from "react";
-import "./App.css";
-import BookShelf from "./BookShelf";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import SearchBooks from "./SearchBooks";
+import BookShelf from "./components/BookShelf";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SearchBooks from "./components/SearchBooks";
+import TestComponent from "./components/TestComponent";
 
-function App({ history }) {
+function App() {
   return (
     <div className="App">
-      <BookShelf />
-      <BrowserRouter>
-        <Route exact path="/search" component={SearchBooks} />
-        <Link to="search">To Search</Link>
-      </BrowserRouter>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={BookShelf} />
+          <Route exact path="/search" component={SearchBooks} />
+        </Switch>
+      </Router>
     </div>
   );
 }

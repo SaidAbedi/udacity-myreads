@@ -39,6 +39,7 @@ class BookPreview extends Component {
               <SelectShelfMenu
                 id={id}
                 shelf={shelf}
+                book={this.props.book}
                 updateBookShelves={this.props.updateBookShelves}
               />
             )}

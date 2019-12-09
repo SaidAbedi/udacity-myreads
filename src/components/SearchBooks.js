@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./searchBooks.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearchPlus } from "@fortawesome/free-solid-svg-icons";
-import * as BookAPI from "./BookAPI";
+import * as BookAPI from "../BookAPI";
 import BookPreview from "./BookPreview";
 
 class SearchBooks extends Component {
@@ -29,7 +29,7 @@ class SearchBooks extends Component {
 
   render() {
     return (
-      <div className="search-bar">
+      <div className="search-page">
         <form>
           <FontAwesomeIcon icon={faSearchPlus} className="icons" />
           <input

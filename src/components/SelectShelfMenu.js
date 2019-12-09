@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "./selectShelf.scss";
+import "./selectShelfMenu.scss";
+import { update } from "../BookAPI";
 
 class SelectShelfMenu extends Component {
   state = {
@@ -12,12 +13,14 @@ class SelectShelfMenu extends Component {
       shelfSelection: e.target.value,
       bookId: id
     });
+
+    update(this.props.book, e.target.value);
   };
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState !== this.state) {
-      this.props.updateBookShelves();
-    }
-  };
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   if (prevState !== this.state) {
+  //     this.props.updateBookShelves();
+  //   }
+  // };
 
   render() {
     const { id, shelf } = this.props;
