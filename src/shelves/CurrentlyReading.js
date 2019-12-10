@@ -12,7 +12,7 @@ const CurrentlyReading = props => {
               <BookPreview
                 book={book}
                 key={book.id}
-                updateBookShelves={props.updateBookShelves}
+                updateBook={props.updateBook}
               />
             );
           })

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CurrentlyReading from "../shelves/CurrentlyReading";
 import Read from "../shelves/Read";
 import WantToRead from "../shelves/WantToRead";
-import { getAll, update } from "../BookAPI";
+import { getAll, update, sortAll } from "../BookAPI";
 import "./bookShelf.scss";
 import { Link } from "react-router-dom";
 
@@ -27,14 +27,23 @@ class BookShelf extends Component {
   }
 
   updateBook = (book, shelf) => {
-    update(book, shelf).then(() => {
-      //this.setState()
-    });
+    update(book, shelf);
+    getAll()
+      .then(({ currentlyReadingBooks, wantToReadBooks, readBooks }) => {
+        this.setState({
+          currentlyReadingBooks,
+          wantToReadBooks,
+          readBooks
+        });
+      })
+      .catch(() => this.setState({ showError: true }));
+    // sortAll(results);
   };
 
   render() {
     if (this.state.showError) {
-      return <ErrorState />;
+      console.log("error");
+      // return <ErrorState />;
     }
 
     return (
@@ -44,10 +53,13 @@ class BookShelf extends Component {
         </div>
         <CurrentlyReading
           books={this.state.currentlyReadingBooks}
-          updateBookShelves={this.updateBookShelves}
+          updateBook={this.updateBook}
         />
-        <Read books={this.state.readBooks} />
-        <WantToRead books={this.state.wantToReadBooks} />
+        <Read books={this.state.readBooks} updateBook={this.updateBook} />
+        <WantToRead
+          books={this.state.wantToReadBooks}
+          updateBook={this.updateBook}
+        />
         <Link to="/search">
           <div className="open-search">
             <button>+</button>

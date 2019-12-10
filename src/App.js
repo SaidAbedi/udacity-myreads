@@ -1,8 +1,7 @@
 import React from "react";
 import BookShelf from "./components/BookShelf";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchBooks from "./components/SearchBooks";
-import TestComponent from "./components/TestComponent";
 
 function App() {
   return (

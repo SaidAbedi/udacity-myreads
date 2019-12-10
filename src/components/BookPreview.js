@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./bookPreview.scss";
-import SelectShelfMenu from "./SelectShelfMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,12 +7,23 @@ class BookPreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showButton: false
+      showButton: false,
+      bookId: "",
+      showMenu: false,
+      shelfSelection: ""
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   handleClick = () => {
     this.setState({ showButton: !this.state.showButton });
+  };
+  handleChange = (e, id) => {
+    this.setState({
+      shelfSelection: e.target.value,
+      bookId: id
+    });
+    this.props.updateBook(this.props.book, e.target.value);
   };
   render() {
     const {
@@ -36,12 +46,23 @@ class BookPreview extends Component {
               className="add-icon"
             />
             {this.state.showButton && (
-              <SelectShelfMenu
-                id={id}
-                shelf={shelf}
-                book={this.props.book}
-                updateBookShelves={this.props.updateBookShelves}
-              />
+              <form className="menu">
+                <select size="4" onChange={e => this.handleChange(e, id)}>
+                  <option value="">--Choose a shelf--</option>
+                  <option
+                    selected={shelf === "currentlyReading"}
+                    value="currentlyReading"
+                  >
+                    Currently Reading
+                  </option>
+                  <option selected={shelf === "wantToRead"} value="wantToRead">
+                    Want to Read
+                  </option>
+                  <option selected={shelf === "read"} value="read">
+                    Read
+                  </option>
+                </select>
+              </form>
             )}
           </div>
         </div>

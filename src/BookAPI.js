@@ -33,7 +33,19 @@ export const getAll = () =>
         readBooks
       };
     });
+export const sortAll = books => {
+  const currentlyReadingBooks = books.filter(
+    book => book.shelf === "currentlyReading"
+  );
+  const wantToReadBooks = books.filter(book => book.shelf === "wantToRead");
+  const readBooks = books.filter(book => book.shelf === "read");
 
+  return {
+    currentlyReadingBooks,
+    wantToReadBooks,
+    readBooks
+  };
+};
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
     method: "PUT",
